@@ -34,11 +34,9 @@ defmodule ScrivenerList.Mixfile do
   end
 
 
-  defp descriptions do
+  defp description do
     ~S"""
-    Paginate a list.
-
-    Compatible with [Scrivener](https://github.com/drewolson/scrivener).
+    A [scrivener](https://github.com/drewolson/scrivener) compatible extension that allows pagination of a list.
     """
   end
 
