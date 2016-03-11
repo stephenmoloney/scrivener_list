@@ -26,7 +26,9 @@ defmodule ScrivenerList.Mixfile do
 
   defp deps do
     [
-     {:scrivener, "~> 1.0"},
+     # {:scrivener, "~> 1.0"},
+     # {:scrivener, path: "../scrivener"},
+     {:scrivener, github: "stephenmoloney/scrivener", branch: "expose-defaults"},
      {:og, "~> 0.0", only: :dev},
      {:earmark, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev}
