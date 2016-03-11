@@ -68,7 +68,45 @@ defmodule ScrivenerList do
   """
   alias Scrivener.Config
   alias Scrivener.Page
-  @fallback_config Scrivener.Config.new(:nil, %{}, %{})
+  @fallback_config Config.new(:nil, %{}, %{})
+
+
+  @doc """
+  ScrivenerList can optionally be `use`d by an Ecto repository.
+
+  When `use`d, an optional default for `page_size` can be provided. If `page_size` is not provided a default of 10 will
+  be used.
+
+  A `max_page_size` can also optionally can be provided. This enforces a hard ceiling for the page size, even
+  if you allow users of your application to specify `page_size` via query parameters. If not provided, there will be no
+  limit to page size.
+
+      defmodule MyApp.Repo do
+        use Ecto.Repo, ...
+        use Scrivener
+      end
+
+      defmodule MyApp.Repo do
+        use Ecto.Repo, ...
+        use Scrivener, page_size: 5, max_page_size: 100
+      end
+
+  When `use` is called, a `paginate` function is defined in the Ecto repo. See the `paginate` documentation for more information.
+  """
+  defmacro __using__(_opts) do
+    quote do
+
+      @spec paginate(list, map | Keyword.t) :: Scrivener.Page.t
+      def paginate(entries, options \\ []) when is_list(entries) do
+        defaults = __MODULE__.scrivener_defaults()
+        config = Config.new(__MODULE__, defaults, options)
+        ScrivenerList.paginate(entries, config)
+      end
+
+    end
+  end
+
+
 
   @doc """
   Paginates a list of elements. Returns a `%Scrivener.Page{}` struct with useful information including:
@@ -99,7 +137,7 @@ defmodule ScrivenerList do
       [ "SQL", "JAVA", "JavaScript", "C#", "C++", "Python", "PHP", "Ruby", "Elixir", "Erlang", "Lisp", "Perl" ]
       |> ScrivenerList.paginate(%Scrivener.Config{page_number: 2, page_size: 3})
   """
-  def paginate(entries, %Config{page_number: page_number, page_size: page_size}, fallback_config \\ @fallback_config) do
+  def paginate(entries, %Config{page_number: page_number, page_size: page_size}) do
       total_entries = length(entries)
 
       %Page{
@@ -109,6 +147,9 @@ defmodule ScrivenerList do
         total_entries: total_entries,
         total_pages: total_pages(total_entries, page_size)
       }
+  end
+  def paginate(entries, %Config{}) do
+    paginate(entries, @fallback_config)
   end
 
 
