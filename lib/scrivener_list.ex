@@ -97,8 +97,7 @@ defmodule ScrivenerList do
   defmacro __using__(_opts) do
     quote do
 
-      @spec paginate(list, map | Keyword.t) :: Scrivener.Page.t
-      def paginate(entries, options \\ []) when is_list(entries) do
+      def paginate(entries, options) when is_list(entries) do
         defaults = __MODULE__.scrivener_defaults()
         config = Config.new(__MODULE__, defaults, options)
         ScrivenerList.paginate(entries, config)
