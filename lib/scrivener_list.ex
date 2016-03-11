@@ -16,6 +16,7 @@ defmodule ScrivenerList do
       defmodule MyApp.Repo do
         use Ecto.Repo, otp_app: :my_app
         use Scrivener, page_size: 10, max_page_size: 100
+        use Scrivener
       end
 
   Second, Retrieve a list of results using an Ecto Query, apply a change as required and paginate the list.
