@@ -16,7 +16,7 @@ defmodule ScrivenerList do
       defmodule MyApp.Repo do
         use Ecto.Repo, otp_app: :my_app
         use Scrivener, page_size: 10, max_page_size: 100
-        use Scrivener
+        use ScrivenerList
       end
 
   Second, Retrieve a list of results using an Ecto Query, apply a change as required and paginate the list.
@@ -85,11 +85,13 @@ defmodule ScrivenerList do
       defmodule MyApp.Repo do
         use Ecto.Repo, ...
         use Scrivener
+        use ScrivenerList
       end
 
       defmodule MyApp.Repo do
         use Ecto.Repo, ...
         use Scrivener, page_size: 5, max_page_size: 100
+        use ScrivenerList
       end
 
   When `use` is called, a `paginate` function is defined in the Ecto repo. See the `paginate` documentation for more information.
