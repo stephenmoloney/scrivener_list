@@ -1,4 +1,7 @@
 # ScrivenerList
+
+[![Build Status](https://travis-ci.org/stephenmoloney/scrivener_list.svg)](https://travis-ci.org/stephenmoloney/scrivener_list) [![Hex Version](http://img.shields.io/hexpm/v/scrivener_list.svg?style=flat)](https://hex.pm/packages/scrivener_list) [![Hex docs](http://img.shields.io/badge/hex.pm-docs-green.svg?style=flat)](https://hexdocs.pm/scrivener_list)
+
 [ScrivenerList](https://hex.pm/packages/scrivener_list) is a Scrivener compatible extension that
 allows one to paginate a list of elements.
 
@@ -6,7 +9,7 @@ ScrivenerList returns pages in the %Scrivener.Page{} format, the same as scriven
 [Scrivener](https://hexdocs.pm/scrivener/) is a required dependency but the creation of
 a Repo module and `use Scrivener` statement therein is optional.
 
-By adding `{:scrivener_list, "~> 1.0"}` to a project's list of dependencies, the `Scrivener.Paginater.paginate/2`
+By adding `{:scrivener_list, "~> 0.1"}` to a project's list of dependencies, the `Scrivener.Paginater.paginate/2`
 function is effectively polymorphically extended to accept a list as the first argument in addition to a
 `Ecto.Query.t.` struct which is the standard type expected by the Scrivener project. This is achieved using
 elixir [protocols](http://elixir-lang.org/getting-started/protocols.html).
@@ -77,7 +80,7 @@ defmodule MyApp.Team do
  |> preload(:dev: from(d in Dev, where: type == "elixir")
  |> Enum.map(&(&1.name <> " - " <> "elixir developer"))
  |> MyApp.Repo.paginate(page: 2, page_size: 5)
- ```
+```
 
 
 #### Usage without an Ecto Repo
@@ -85,11 +88,17 @@ defmodule MyApp.Team do
 Since the %Scrivener.Config() is not configured using this method, one of the following
 must be passed in as the second argument to ScrivenerList.paginate/2:
 
-```%{page: page_number, page_size: page_size}```
+```elixir
+  %{page: page_number, page_size: page_size}
+```
 or
-```[page: page_number, page_size: page_size]```
+```elixir
+  [page: page_number, page_size: page_size]
+```
 or
-```%Scrivener.Config{page_number: page_number, page_size: page_size}```
+```elixir
+  %Scrivener.Config{page_number: page_number, page_size: page_size}
+```
 
 
 ```elixir
@@ -120,8 +129,8 @@ or
   end
 ```
 
-  *Note:* Using method 2, it is not possible to set a max_page_size ceiling when using the
-  `ScrivenerList.paginate/2` function.
+*Note:* Using method 2, it is not possible to set a max_page_size ceiling when using the
+`ScrivenerList.paginate/2` function.
 
 
 ## Installation
