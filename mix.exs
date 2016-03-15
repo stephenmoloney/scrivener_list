@@ -4,7 +4,7 @@ defmodule ScrivenerList.Mixfile do
   def project do
     [
      app: :scrivener_list,
-     version: "0.0.1",
+     version: "0.1",
      elixir: "~> 1.0",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -12,7 +12,7 @@ defmodule ScrivenerList.Mixfile do
      package: package,
      deps: deps,
      docs: [
-       main: Scrivener.List,
+       main: ScrivenerList,
        readme: "README.md"
      ]
     ]
@@ -26,10 +26,8 @@ defmodule ScrivenerList.Mixfile do
 
   defp deps do
     [
-     # {:scrivener, "~> 1.0"},
-     # {:scrivener, path: "../scrivener"},
-     {:scrivener, github: "stephenmoloney/scrivener", branch: "expose-defaults"},
-     {:og, "~> 0.0", only: :dev},
+     {:scrivener, github: "drewolson/scrivener", branch: "protocol"},
+     {:ex_spec, "~> 1.0", only: :test},
      {:earmark, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev}
     ]
@@ -50,7 +48,7 @@ defmodule ScrivenerList.Mixfile do
       links: %{"github" => "https://github.com/stephenmoloney/scrivener_list"},
       files: [
         "lib/scrivener_list.ex",
-        "lib/scrivener_list",
+        "lib/scrivener/paginater/list.ex",
         "mix.exs",
         "README.md"
       ]
