@@ -93,33 +93,32 @@ or
 
 
 ```elixir
-def index(conn, params) do
+  def index(conn, params) do
+    params =
+    case params do
+      %Scrivener.Config{page_number: page_number, page_size: page_size} ->
+        %Scrivener.Config{page_number: page_number, page_size: page_size}
+      %{page: page_number, page_size: page_size} ->
+        %{page: page_number, page_size: page_size}
+      [page: page_number, page_size: page_size] ->
+        [page: page_number, page_size: page_size]
+      _ ->
+        %Scrivener.Config{page_number: 1, page_size: 10}
+    end
 
-  params =
-  case params do
-    %Scrivener.Config{page_number: page_number, page_size: page_size} ->
-      %Scrivener.Config{page_number: page_number, page_size: page_size}
-    %{page: page_number, page_size: page_size} ->
-      %{page: page_number, page_size: page_size}
-    [page: page_number, page_size: page_size] ->
-      [page: page_number, page_size: page_size]
-    _ ->
-      %Scrivener.Config{page_number: 1, page_size: 10}
+    ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
+      "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+    |> Enum.map(&(&1 <> " - " <> "language"))
+    |> ScrivenerList.paginate(params)
+
+    render conn, :index,
+      people: page.entries,
+      page_number: page.page_number,
+      page_size: page.page_size,
+      total_pages: page.total_pages,
+      total_entries: page.total_entries
   end
-
-  ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
-    "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-  |> Enum.map(&(&1 <> " - " <> "language"))
-  |> ScrivenerList.paginate(params)
-
-  render conn, :index,
-    people: page.entries,
-    page_number: page.page_number,
-    page_size: page.page_size,
-    total_pages: page.total_pages,
-    total_entries: page.total_entries
-  end
-  ```
+```
 
   *Note:* Using method 2, it is not possible to set a max_page_size ceiling when using the
   `ScrivenerList.paginate/2` function.
@@ -144,6 +143,12 @@ Set up the Repo file for scrivener
     use Ecto.Repo, otp_app: :my_app
     use Scrivener, page_size: 10, max_page_size: 100
   end
+```
+
+## Tests
+
+```shell
+  mix test
 ```
 
 
