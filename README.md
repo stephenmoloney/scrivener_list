@@ -88,18 +88,11 @@ defmodule MyApp.Team do
 Since the %Scrivener.Config() is not configured using this method, one of the following
 must be passed in as the second argument to ScrivenerList.paginate/2:
 
-```elixir
-  %{page: page_number, page_size: page_size}
-```
+```%{page: page_number, page_size: page_size}```
 or
-```elixir
-  [page: page_number, page_size: page_size]
-```
+```[page: page_number, page_size: page_size]```
 or
-```elixir
-  %Scrivener.Config{page_number: page_number, page_size: page_size}
-```
-
+```%Scrivener.Config{page_number: page_number, page_size: page_size}```
 
 ```elixir
   def index(conn, params) do
