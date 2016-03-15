@@ -26,8 +26,7 @@ query is complete. This extension allows for the pagination of said lists.
 
 First, setup the scrivener as normal. See [scrivener docs](https://hexdocs.pm/scrivener/Scrivener.html)
 
-If using a Repo,, you'll want to `use` Scrivener in your application's Repo. This will add a `paginate`
-function to your Repo. If no database requests are being made then setting up a Repo module
+If using a Repo,, you'll want to add `use Scrivener, page_size: page_size` in your application's Repo. This will add a `paginate/2` function to your Repo. If no database requests are being made then setting up a Repo module
 is an optional step with ScrivenerList since ScrivenerList can also paginate a list provided it is
 passed a list and a custom `%Scrivener.Config{}` struct.
 
@@ -60,7 +59,7 @@ defmodule MyApp.Team do
 
  def index(conn, params) do
    page = MyApp.Repo.All(Team)
-   |> preload(:dev: from(d in Dev, where: type == "elixir")
+   |> preload(dev: from(d in Dev, where: type == "elixir")
    |> Enum.map(&(&1.name <> " - " <> "elixir developer"))
    |> MyApp.Repo.paginate(params)
 
@@ -73,11 +72,11 @@ defmodule MyApp.Team do
  end
  ```
 
- A Custom page number and page_size can be passed
+ A Custom page number and page_size can be used
 
 ```elixir
  page = MyApp.Repo.All(Team)
- |> preload(:dev: from(d in Dev, where: type == "elixir")
+ |> preload(dev: from(d in Dev, where: type == "elixir")
  |> Enum.map(&(&1.name <> " - " <> "elixir developer"))
  |> MyApp.Repo.paginate(page: 2, page_size: 5)
 ```
@@ -85,14 +84,12 @@ defmodule MyApp.Team do
 
 #### Usage without an Ecto Repo
 
-Since the %Scrivener.Config() is not configured using this method, one of the following
-must be passed in as the second argument to ScrivenerList.paginate/2:
+Since the `%Scrivener.Config{}` struct is not configured when there is no repo, one of the following
+must be passed in as the second argument to `ScrivenerList.paginate/2`:
 
-```%{page: page_number, page_size: page_size}```
-or
-```[page: page_number, page_size: page_size]```
-or
-```%Scrivener.Config{page_number: page_number, page_size: page_size}```
+- ```%{page: page_number, page_size: page_size}```
+- ```[page: page_number, page_size: page_size]```
+- ```%Scrivener.Config{page_number: page_number, page_size: page_size}```
 
 ```elixir
   def index(conn, params) do
@@ -133,12 +130,12 @@ Add [scrivener](https://hex.pm/packages/scrivener) and [scrivener_list](https://
 ```elixir
   def deps do
     [
-      {:scrivener_list, "~> 0.1"}
+      {:scrivener_list, "~> 0.9"}
     ]
   end
 ```
 
-Set up the Repo file for scrivener
+Set up the Repo module for using scrivener
 
 ```elixir
   defmodule MyApp.Repo do
