@@ -162,7 +162,7 @@ defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, pa
 
 ## Installation
 
-Add [scrivener](https://hex.pm/packages/scrivener) and [scrivener_list](https://hex.pm/packages/scrivener_list) to your list of dependencies in `mix.exs`:
+Add [scrivener_list](https://hex.pm/packages/scrivener_list) to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
@@ -186,6 +186,11 @@ end
 ```shell
 mix test
 ```
+
+
+## Acknowledgements
+
+Thanks to [Drew Olson](https://github.com/drewolson) for helping with this, particularly the introduction of the protocol.
 
 
 ## Licence
