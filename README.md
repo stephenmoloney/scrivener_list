@@ -108,9 +108,7 @@ must be passed in as the second argument to `ScrivenerList.paginate/2`:
       total_entries: page.total_entries
   end
 
-  defp maybe_put_default_config(%Scrivener.Config{} = params), do: params
   defp maybe_put_default_config(%{page: page_number, page_size: page_size} = params), do: params
-  defp maybe_put_default_config([page: page_number, page_size: page_size] = params), do: params
   defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, page_size: 10}
 ```
 
