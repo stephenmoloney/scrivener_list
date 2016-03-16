@@ -29,7 +29,7 @@ defmodule ScrivenerList.Mixfile do
 
   defp deps do
     [
-     {:scrivener, github: "drewolson/scrivener", branch: "protocol"},
+     {:scrivener, github: "drewolson/scrivener", branch: "v2"},
      {:ex_spec, "~> 1.0", only: :test},
      {:earmark, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev}
@@ -50,7 +50,6 @@ defmodule ScrivenerList.Mixfile do
       licenses: ["MIT"],
       links: %{"github" => "https://github.com/stephenmoloney/scrivener_list"},
       files: [
-        "lib/scrivener_list.ex",
         "lib/scrivener/paginater/list.ex",
         "mix.exs",
         "README.md"
