@@ -93,22 +93,12 @@ must be passed in as the second argument to `ScrivenerList.paginate/2`:
 
 ```elixir
   def index(conn, params) do
-    params =
-    case params do
-      %Scrivener.Config{page_number: page_number, page_size: page_size} ->
-        %Scrivener.Config{page_number: page_number, page_size: page_size}
-      %{page: page_number, page_size: page_size} ->
-        %{page: page_number, page_size: page_size}
-      [page: page_number, page_size: page_size] ->
-        [page: page_number, page_size: page_size]
-      _ ->
-        %Scrivener.Config{page_number: 1, page_size: 10}
-    end
+    config = maybe_put_default_config(params)
 
     ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
       "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
     |> Enum.map(&(&1 <> " - " <> "language"))
-    |> ScrivenerList.paginate(params)
+    |> ScrivenerList.paginate(config)
 
     render conn, :index,
       people: page.entries,
@@ -117,6 +107,11 @@ must be passed in as the second argument to `ScrivenerList.paginate/2`:
       total_pages: page.total_pages,
       total_entries: page.total_entries
   end
+
+  defp maybe_put_default_config(%Scrivener.Config{} = params), do: params
+  defp maybe_put_default_config(%{page: page_number, page_size: page_size} = params), do: params
+  defp maybe_put_default_config([page: page_number, page_size: page_size] = params), do: params
+  defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, page_size: 10}
 ```
 
 *Note:* Using method 2, it is not possible to set a max_page_size ceiling when using the
