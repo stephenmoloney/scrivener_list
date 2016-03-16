@@ -80,10 +80,10 @@ end
 A Custom page number and page_size can be used
 
 ```elixir
- page = MyApp.Repo.All(Team)
- |> MyApp.Repo.preload(dev: from(d in Dev, where: type == "elixir")
- |> Enum.map(&(&1.name <> "  " <> "elixir developer"))
- |> MyApp.Repo.paginate(page: 2, page_size: 5)
+page = MyApp.Repo.All(Team)
+|> MyApp.Repo.preload(dev: from(d in Dev, where: type == "elixir")
+|> Enum.map(&(&1.name <> "  " <> "elixir developer"))
+|> MyApp.Repo.paginate(page: 2, page_size: 5)
 ```
 
 
@@ -102,57 +102,57 @@ must be passed in as the second argument to `Scrivener.paginate/2`:
 #### Example
 
 ```elixir
-  def index(conn, params) do
-    config = maybe_put_default_config(params)
+def index(conn, params) do
+  config = maybe_put_default_config(params)
 
-    ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
-      "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-    |> Enum.map(&(&1 <> "  " <> "language"))
-    |> Scrivener.paginate(config)
+  ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
+    "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+  |> Enum.map(&(&1 <> "  " <> "language"))
+  |> Scrivener.paginate(config)
 
-    render conn, :index,
-      people: page.entries,
-      page_number: page.page_number,
-      page_size: page.page_size,
-      total_pages: page.total_pages,
-      total_entries: page.total_entries
-  end
+  render conn, :index,
+    people: page.entries,
+    page_number: page.page_number,
+    page_size: page.page_size,
+    total_pages: page.total_pages,
+    total_entries: page.total_entries
+end
 
-  defp maybe_put_default_config(%{page: page_number, page_size: page_size} = params), do: params
-  defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, page_size: 10}
+defp maybe_put_default_config(%{page: page_number, page_size: page_size} = params), do: params
+defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, page_size: 10}
 ```
 
 **Pending**
 #### Example using a `%Scrivener.Config{}` struct
 
 ```elixir  
-  ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
-    "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-  |> MyApp.Repo.paginate(%Scrivener.Config{page_number: 1, page_size: 4})
+["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
+  "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+|> MyApp.Repo.paginate(%Scrivener.Config{page_number: 1, page_size: 4})
 ```
 
 #### Example using a keyword list of options
 
 ```elixir
-      ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
-        "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-      |> MyApp.Repo..paginate(page: 1, page_size: 4)
+["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
+  "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+|> MyApp.Repo..paginate(page: 1, page_size: 4)
 ```
 
 #### Example using a map of options
 
 ```elixir
-      ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
-        "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-      |> MyApp.Repo.paginate(%{page: 1, page_size: 4})
+["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
+  "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+|> MyApp.Repo.paginate(%{page: 1, page_size: 4})
 ```
 
 #### Example using only the page number (page_size defaults to 10)
 
 ```elixir
-      ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
-        "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-      |> MyApp.Repo.paginate(%{page: 1})
+["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
+  "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+|> MyApp.Repo.paginate(%{page: 1})
 ```
 **Pending**
 
