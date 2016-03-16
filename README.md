@@ -1,6 +1,6 @@
 # ScrivenerList
 
-[![Build Status](https://travis-ci.org/stephenmoloney/scrivener_list.svg)](https://travis-ci.org/stephenmoloney/scrivener_list) [![Hex Version](http://img.shields.io/hexpm/v/scrivener_list.svg?style=flat)](https://hex.pm/packages/scrivener_list) [![Hex docs](http://img.shields.io/badge/hex.pm-docs-green.svg?style=flat)](https://hexdocs.pm/scrivener_list)
+[![Build Status](https://travisci.org/stephenmoloney/scrivener_list.svg)](https://travisci.org/stephenmoloney/scrivener_list) [![Hex Version](http://img.shields.io/hexpm/v/scrivener_list.svg?style=flat)](https://hex.pm/packages/scrivener_list) [![Hex docs](http://img.shields.io/badge/hex.pmdocsgreen.svg?style=flat)](https://hexdocs.pm/scrivener_list)
 
 [ScrivenerList](https://hex.pm/packages/scrivener_list) is a Scrivener compatible extension that
 allows one to paginate a list of elements.
@@ -13,7 +13,7 @@ a Repo module and `use Scrivener` statement therein is optional.
 By adding `{:scrivener_list, "~> 0.9"}` to a project's list of dependencies, the `Scrivener.Paginater.paginate/2`
 function is effectively polymorphically extended to accept a list as the first argument in addition to a
 `Ecto.Query.t.` struct which is the standard type expected by the Scrivener project. This is achieved using
-elixir [protocols](http://elixir-lang.org/getting-started/protocols.html) and specifically the `Scrivener.Paginater.paginate/2` function.
+elixir [protocols](http://elixirlang.org/gettingstarted/protocols.html) and specifically the `Scrivener.Paginater.paginate/2` function.
 
 
 ## Motivation
@@ -33,7 +33,9 @@ as described in greater detail later.
 
 With Scrivener, there are two ways to make use of the `paginate` function:
 
-#### Usage with a `use Scrivener, ...` statement inside the Repo module
+## 1. Usage with a `use Scrivener, ...` statement inside the Repo module
+
+#### Example
 
 ```elixir
 defmodule MyApp.Repo do
@@ -61,7 +63,7 @@ defmodule MyApp.Team do
  def index(conn, params) do
    page = MyApp.Repo.All(Team)
    |> MyApp.Repo.preload(dev: from(d in Dev, where: type == "elixir")
-   |> Enum.map(&(&1.name <> " - " <> "elixir developer"))
+   |> Enum.map(&(&1.name <> "  " <> "elixir developer"))
    |> MyApp.Repo.paginate(params)
 
    render conn, :index,
@@ -73,26 +75,31 @@ defmodule MyApp.Team do
  end
  ```
 
+ #### Example
+
  A Custom page number and page_size can be used
 
 ```elixir
  page = MyApp.Repo.All(Team)
  |> MyApp.Repo.preload(dev: from(d in Dev, where: type == "elixir")
- |> Enum.map(&(&1.name <> " - " <> "elixir developer"))
+ |> Enum.map(&(&1.name <> "  " <> "elixir developer"))
  |> MyApp.Repo.paginate(page: 2, page_size: 5)
 ```
 
 
-#### Usage without a `use Scrivener, ...` statement and without a Repo module
+## 2. Usage without a `use Scrivener, ...` statement and without a Repo module
 
 Since the `%Scrivener.Config{}` struct is not configured when there is no Repo module, one of the following
 must be passed in as the second argument to `Scrivener.paginate/2`:
 
-- ```%{page: page_number, page_size: page_size}```
-- ```[page: page_number, page_size: page_size]```
-- ```%Scrivener.Config{page_number: page_number, page_size: page_size}```
+ ```%{page: page_number, page_size: page_size}```
+ ```[page: page_number, page_size: page_size]```
+ ```%Scrivener.Config{page_number: page_number, page_size: page_size}```
+
 *NOTE:* This feature is pending implementation of the keyword opts and map opts for `Scrivener.paginate/2`
-and the exact implementation may vary from above - remains to be seen.
+and the exact implementation may vary from above and remains to be seen.
+
+#### Example
 
 ```elixir
   def index(conn, params) do
@@ -100,7 +107,7 @@ and the exact implementation may vary from above - remains to be seen.
 
     ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
       "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-    |> Enum.map(&(&1 <> " - " <> "language"))
+    |> Enum.map(&(&1 <> "  " <> "language"))
     |> Scrivener.paginate(config)
 
     render conn, :index,
@@ -113,6 +120,41 @@ and the exact implementation may vary from above - remains to be seen.
 
   defp maybe_put_default_config(%{page: page_number, page_size: page_size} = params), do: params
   defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, page_size: 10}
+```
+
+*NOTE:* These examples are pending implementation of the keyword opts and map opts for `Scrivener.paginate/2`
+and the exact implementation may vary from below and remains to be seen.
+
+  #### Example using a `%Scrivener.Config{}` struct
+
+```elixir  
+  ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
+    "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+  |> MyApp.Repo.paginate(%Scrivener.Config{page_number: 1, page_size: 4})
+```
+
+  #### Example using a keyword list of options
+
+``elixir
+      ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
+        "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+      |> MyApp.Repo..paginate(page: 1, page_size: 4)
+```
+
+  #### Example using a map of options
+
+```elixir
+      ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
+        "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+      |> MyApp.Repo.paginate(%{page: 1, page_size: 4})
+```
+
+  #### Example using only the page number (page_size defaults to 10)
+
+```elixir
+      ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
+        "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+      |> MyApp.Repo.paginate(%{page: 1})
 ```
 
 *Note:* Using method 2, it is currently not possible to set a max_page_size ceiling when using the
