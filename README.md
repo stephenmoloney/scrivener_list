@@ -9,7 +9,7 @@ ScrivenerList returns pages in the %Scrivener.Page{} format, the same as scriven
 [Scrivener](https://hexdocs.pm/scrivener/) is a required dependency but the creation of
 a Repo module and `use Scrivener` statement therein is optional.
 
-By adding `{:scrivener_list, "~> 0.1"}` to a project's list of dependencies, the `Scrivener.Paginater.paginate/2`
+By adding `{:scrivener_list, "~> 0.9"}` to a project's list of dependencies, the `Scrivener.Paginater.paginate/2`
 function is effectively polymorphically extended to accept a list as the first argument in addition to a
 `Ecto.Query.t.` struct which is the standard type expected by the Scrivener project. This is achieved using
 elixir [protocols](http://elixir-lang.org/getting-started/protocols.html).

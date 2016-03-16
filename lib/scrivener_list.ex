@@ -5,12 +5,12 @@ defmodule ScrivenerList do
   [Scrivener](https://hexdocs.pm/scrivener/) is a required dependency but the creation of
   a Repo module and `use Scrivener` statement therein is optional.
 
-  By adding `{:scrivener_list, "~> 0.1"}` to a project's list of dependencies, the `Scrivener.Paginater.paginate/2`
+  By adding `{:scrivener_list, "~> 0.9"}` to a project's list of dependencies, the `Scrivener.Paginater.paginate/2`
   function is effectively polymorphically extended to accept a list as the first argument in addition to a
   `Ecto.Query.t.` struct which is the standard type expected by the Scrivener project. This is achieved using
   elixir [protocols](http://elixir-lang.org/getting-started/protocols.html).
 
-  If using a Repo,, you'll want to `use` Scrivener in your application's Repo. This will add a `paginate`
+  If using a Repo, you'll want to `use` Scrivener in your application's Repo. This will add a `paginate`
   function to your Repo. If no database requests are being made then setting up a Repo module
   is an optional step with ScrivenerList since ScrivenerList can also paginate a list provided it is
   passed a list and a custom `%Scrivener.Config{}` struct.
@@ -29,7 +29,7 @@ defmodule ScrivenerList do
          schema "team" do
            field :name, :string
            field :size, :integer
-           has_many :dev, MyApp.Team
+           has_many :dev, MyApp.Dev
          end
        end
        defmodule MyApp.Dev do
@@ -62,20 +62,20 @@ defmodule ScrivenerList do
        |> Enum.map(&(&1.name <> " - " <> "elixir developer"))
        |> MyApp.Repo.paginate(page: 2, page_size: 5)
 
-   ## Method 2: With the ScrivenerList.paginate/2 function
+ ## Method 2: With the ScrivenerList.paginate/2 function
 
-      Since the %Scrivener.Config() is not configured using this method, one of the following
-      must be passed in as the second argument to ScrivenerList.paginate/2:
+  Since the %Scrivener.Config() is not configured using this method, one of the following
+  must be passed in as the second argument to ScrivenerList.paginate/2:
 
-      %{page: page_number, page_size: page_size}
-      or
-      [page: page_number, page_size: page_size]
-      or
-      %Scrivener.Config{page_number: page_number, page_size: page_size}
+  - ```%{page: page_number, page_size: page_size}```
+  - ```[page: page_number, page_size: page_size]```
+  - ```%Scrivener.Config{page_number: page_number, page_size: page_size}```
+
+  ## Example
 
       ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
-        "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-      |> ScrivenerList.paginate(%Scrivener.Config{page_number: 1, page_size: 40})
+      "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+      |> ScrivenerList.paginate(%Scrivener.Config{page_number: 1, page_size: 4})
 
   *Note:* Using method 2, it is not possible to set a max_page_size ceiling. On the other hand,
   when a Repo module is setup and used for pagination purposes, a max_page_size may
@@ -117,7 +117,7 @@ defmodule ScrivenerList do
         "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
       |> ScrivenerList.paginate(%{page: 1, page_size: 4})
 
-  ## Example using only the page number (page_size defaults to to the page_size set in the Repo
+  ## Example using only the page number (page_size defaults to to the page_size set in the Repo)
         `use` Scrivener statement)
 
       ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",

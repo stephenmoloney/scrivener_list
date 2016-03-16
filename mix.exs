@@ -8,12 +8,15 @@ defmodule ScrivenerList.Mixfile do
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     source_url: "https://github.com/stephenmoloney/scrivener_list",
+     homepage_url: "https://hexdocs.pm/scrivener_list",
      description: description,
      package: package,
      deps: deps,
      docs: [
-       main: ScrivenerList,
-       readme: "README.md"
+       main: "README.md",
+       extra_section: "Readme",
+       extras: ["README.md": [path: "README.md", title: "Readme"]]
      ]
     ]
   end
