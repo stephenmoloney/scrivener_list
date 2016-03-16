@@ -131,7 +131,7 @@ must be passed in as the second argument to `Scrivener.paginate/2`:
   |> MyApp.Repo.paginate(%Scrivener.Config{page_number: 1, page_size: 4})
 ```
 
-  #### Example using a keyword list of options
+#### Example using a keyword list of options
 
 ```elixir
       ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
