@@ -5,14 +5,15 @@
 [ScrivenerList](https://hex.pm/packages/scrivener_list) is a Scrivener compatible extension that
 allows one to paginate a list of elements.
 
-ScrivenerList returns pages in the %Scrivener.Page{} format, the same as scrivener.
+ScrivenerList extends the functions `Scrivener.paginate/2` and `MyApp.Repo.paginate/2` such that
+a list can be passed and the function returns pages in the %Scrivener.Page{} format, the same as scrivener.
 [Scrivener](https://hexdocs.pm/scrivener/) is a required dependency but the creation of
 a Repo module and `use Scrivener` statement therein is optional.
 
 By adding `{:scrivener_list, "~> 0.9"}` to a project's list of dependencies, the `Scrivener.Paginater.paginate/2`
 function is effectively polymorphically extended to accept a list as the first argument in addition to a
 `Ecto.Query.t.` struct which is the standard type expected by the Scrivener project. This is achieved using
-elixir [protocols](http://elixir-lang.org/getting-started/protocols.html).
+elixir [protocols](http://elixir-lang.org/getting-started/protocols.html) and specifically the `Scrivener.Paginater.paginate/2` function.
 
 
 ## Motivation
@@ -26,13 +27,13 @@ query is complete. This extension allows for the pagination of said lists.
 
 First, setup the scrivener as normal. See [scrivener docs](https://hexdocs.pm/scrivener/Scrivener.html)
 
-If using a Repo,, you'll want to add `use Scrivener, page_size: page_size` in your application's Repo. This will add a `paginate/2` function to your Repo. If no database requests are being made then setting up a Repo module
-is an optional step with ScrivenerList since ScrivenerList can also paginate a list provided it is
-passed a list and a custom `%Scrivener.Config{}` struct.
+If using a Repo,, you'll want to add `use Scrivener, page_size: page_size` in your application's Repo. This will add a `paginate/2` function to the Repo module. If no database requests are being made using Ecto then
+setting up a Repo module is an optional step with Scrivener since Scrivener can also paginate a list provided it is passed a list and a custom `%Scrivener.Config{}` struct, or keyword options or a map of options
+as described in greater detail later.
 
-With ScrivenerList, there are two ways to make use of the `paginate` function:
+With Scrivener, there are two ways to make use of the `paginate` function:
 
-#### Usage with a Repo module and the `use` Scrivener setup
+#### Usage with a `use Scrivener, ...` statement inside the Repo module
 
 ```elixir
 defmodule MyApp.Repo do
@@ -59,7 +60,7 @@ defmodule MyApp.Team do
 
  def index(conn, params) do
    page = MyApp.Repo.All(Team)
-   |> preload(dev: from(d in Dev, where: type == "elixir")
+   |> MyApp.Repo.preload(dev: from(d in Dev, where: type == "elixir")
    |> Enum.map(&(&1.name <> " - " <> "elixir developer"))
    |> MyApp.Repo.paginate(params)
 
@@ -76,20 +77,22 @@ defmodule MyApp.Team do
 
 ```elixir
  page = MyApp.Repo.All(Team)
- |> preload(dev: from(d in Dev, where: type == "elixir")
+ |> MyApp.Repo.preload(dev: from(d in Dev, where: type == "elixir")
  |> Enum.map(&(&1.name <> " - " <> "elixir developer"))
  |> MyApp.Repo.paginate(page: 2, page_size: 5)
 ```
 
 
-#### Usage without an Ecto Repo
+#### Usage without a `use Scrivener, ...` statement and without a Repo module
 
-Since the `%Scrivener.Config{}` struct is not configured when there is no repo, one of the following
-must be passed in as the second argument to `ScrivenerList.paginate/2`:
+Since the `%Scrivener.Config{}` struct is not configured when there is no Repo module, one of the following
+must be passed in as the second argument to `Scrivener.paginate/2`:
 
 - ```%{page: page_number, page_size: page_size}```
 - ```[page: page_number, page_size: page_size]```
 - ```%Scrivener.Config{page_number: page_number, page_size: page_size}```
+*NOTE:* This feature is pending implementation of the keyword opts and map opts for `Scrivener.paginate/2`
+and the exact implementation may vary from above - remains to be seen.
 
 ```elixir
   def index(conn, params) do
@@ -98,7 +101,7 @@ must be passed in as the second argument to `ScrivenerList.paginate/2`:
     ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
       "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
     |> Enum.map(&(&1 <> " - " <> "language"))
-    |> ScrivenerList.paginate(config)
+    |> Scrivener.paginate(config)
 
     render conn, :index,
       people: page.entries,
@@ -112,8 +115,8 @@ must be passed in as the second argument to `ScrivenerList.paginate/2`:
   defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, page_size: 10}
 ```
 
-*Note:* Using method 2, it is not possible to set a max_page_size ceiling when using the
-`ScrivenerList.paginate/2` function.
+*Note:* Using method 2, it is currently not possible to set a max_page_size ceiling when using the
+`Scrivener.paginate/2` function.
 
 
 ## Installation
