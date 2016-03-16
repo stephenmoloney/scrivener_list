@@ -1,6 +1,4 @@
-# ScrivenerList
-
-[![Build Status](https://travis-ci.org/stephenmoloney/scrivener_list.svg)](https://travis-ci.org/stephenmoloney/scrivener_list) [![Hex Version](http://img.shields.io/hexpm/v/scrivener_list.svg?style=flat)](https://hex.pm/packages/scrivener_list) [![Hex docs](http://img.shields.io/badge/hex.pm-docs-green.svg?style=flat)](https://hexdocs.pm/scrivener_list)
+# ScrivenerList [![Build Status](https://travis-ci.org/stephenmoloney/scrivener_list.svg)](https://travis-ci.org/stephenmoloney/scrivener_list) [![Hex Version](http://img.shields.io/hexpm/v/scrivener_list.svg?style=flat)](https://hex.pm/packages/scrivener_list) [![Hex docs](http://img.shields.io/badge/hex.pm-docs-green.svg?style=flat)](https://hexdocs.pm/scrivener_list)
 
 [ScrivenerList](https://hex.pm/packages/scrivener_list) is a Scrivener compatible extension that
 allows one to paginate a list of elements.
@@ -29,7 +27,7 @@ First, setup the scrivener as normal. See [scrivener docs](https://hexdocs.pm/sc
 
 If using a Repo, you'll want to add `use Scrivener, page_size: page_size` in your application's Repo. This will add a `paginate/2` function to the Repo module. If no database requests are being made using Ecto then
 setting up a Repo module is an optional step with Scrivener since Scrivener can also paginate a list provided it is passed a list and a custom `%Scrivener.Config{}` struct, or keyword options or a map of options
-by way of the `Scrivener.paginate/2` function. **Pending**
+by way of the `Scrivener.paginate/2` function.
 
 With Scrivener, there are two ways to make use of the `paginate` function:
 
@@ -92,12 +90,9 @@ page = MyApp.Repo.All(Team)
 Since the `%Scrivener.Config{}` struct is not configured when there is no Repo module, one of the following
 must be passed in as the second argument to `Scrivener.paginate/2`:
 
-**Pending**
  - ```%{page: page_number, page_size: page_size}```
  - ```[page: page_number, page_size: page_size]```
  - ```%Scrivener.Config{page_number: page_number, page_size: page_size}```
-**Pending**
-
 
 #### Example
 
@@ -122,7 +117,6 @@ defp maybe_put_default_config(%{page: page_number, page_size: page_size} = param
 defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, page_size: 10}
 ```
 
-**Pending**
 #### Example using a `%Scrivener.Config{}` struct
 
 ```elixir  
@@ -154,7 +148,6 @@ defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, pa
   "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
 |> MyApp.Repo.paginate(%{page: 1})
 ```
-**Pending**
 
 *Note:* Using method 2, it is currently not possible to set a max_page_size ceiling when using the
 `Scrivener.paginate/2` function.

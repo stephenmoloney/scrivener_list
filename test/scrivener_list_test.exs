@@ -95,74 +95,68 @@ defmodule ScrivenerListTest do
       assert page.total_pages == Float.ceil(length(languages)/4)
     end
 
-    # Uncomment this test pending implementation of the new Scrivener.paginate/2 function
-    # it "can paginate a list when provided the current page and page size as a params map" do
-    #   page = Scrivener.paginate(@languages, %{"page" => "2", "page_size" => "3"})
-    #
-    #   assert page.page_size == 3
-    #   assert page.page_number == 2
-    #   assert page.entries == ["Elixir", "Erlang", "Go"]
-    #   assert page.total_entries == @total_entries
-    #   assert page.total_pages == Float.ceil(length(@languages)/3)
-    # end
+    it "can paginate a list when provided the current page and page size as a params map" do
+      page = Scrivener.paginate(@languages, %{"page" => "2", "page_size" => "3"})
 
-    # Uncomment this test pending implementation of the new Scrivener.paginate/2 function
-    # it "can paginate a list when provided the current page and page size as a keyword list" do
-    #   page = Scrivener.paginate(@languages, page: 2, page_size: 3)
-    #
-    #   assert page.page_size == 3
-    #   assert page.page_number == 2
-    #   assert page.entries == ["Elixir", "Erlang", "Go"]
-    #   assert page.total_pages == Float.ceil(length(@languages)/3)
-    #   assert page.total_entries == @total_entries
-    # end
+      assert page.page_size == 3
+      assert page.page_number == 2
+      assert page.entries == ["Elixir", "Erlang", "Go"]
+      assert page.total_entries == @total_entries
+      assert page.total_pages == Float.ceil(length(@languages)/3)
+    end
 
-    # Uncomment this test pending implementation of the new Scrivener.paginate/2 function
-    # it "can paginate a list when only provided with the page size as a keyword list
-    #     and the page number defaults to page 1" do
-    #   page = Scrivener.paginate(@languages, page_size: 3)
-    #
-    #   assert page.page_size == 3
-    #   assert page.page_number == 1
-    #   assert page.entries == ["C#", "C++", "Clojure"]
-    #   assert page.total_pages == Float.ceil(length(@languages)/3)
-    #   assert page.total_entries == @total_entries
-    # end
+    it "can paginate a list when provided the current page and page size as a keyword list" do
+      page = Scrivener.paginate(@languages, page: 2, page_size: 3)
 
-    # Uncomment this test pending implementation of the new Scrivener.paginate/2 function
-    # it "can paginate a list when only provided with the page number as a keyword list
-    #     and the page size defaults to 10" do
-    #   page = Scrivener.paginate(@languages, page: 2)
-    #
-    #   assert page.page_size == 10
-    #   assert page.page_number == 2
-    #   assert page.entries == [ "Perl", "Python", "Ruby", "Rust", "SQL"]
-    #   assert page.total_pages == Float.ceil(length(@languages)/10)
-    #   assert page.total_entries == @total_entries
-    # end
+      assert page.page_size == 3
+      assert page.page_number == 2
+      assert page.entries == ["Elixir", "Erlang", "Go"]
+      assert page.total_pages == Float.ceil(length(@languages)/3)
+      assert page.total_entries == @total_entries
+    end
 
-    # Uncomment this test pending implementation of the new Scrivener.paginate/2 function
-    # it "can paginate a list when provided the current page and page size is absent" do
-    #   page = Scrivener.paginate(@languages, page: 2)
-    #
-    #   assert page.page_size == 10
-    #   assert page.page_number == 2
-    #   assert page.entries == ["Perl", "Python", "Ruby", "Rust", "SQL"]
-    #   assert page.total_pages == Float.ceil(length(@languages)/10)
-    #   assert page.total_entries == @total_entries
-    # end
+    it "can paginate a list when only provided with the page size as a keyword list
+        and the page number defaults to page 1" do
+      page = Scrivener.paginate(@languages, page_size: 3)
 
-    # Uncomment this test pending implementation of the new Scrivener.paginate/2 function
-    #   it "cannot respect a max_page_size configuration" do
-    #     page = Scrivener.paginate(@languages, page: 2, page_size: 200)
-    #
-    #     refute page.page_size < 200
-    #     assert page.page_number == 2
-    #     assert page.entries == []
-    #     assert page.total_pages == Float.ceil(length(@languages)/200)
-    #     assert page.total_entries == @total_entries
-    #   end
-    
+      assert page.page_size == 3
+      assert page.page_number == 1
+      assert page.entries == ["C#", "C++", "Clojure"]
+      assert page.total_pages == Float.ceil(length(@languages)/3)
+      assert page.total_entries == @total_entries
+    end
+
+    it "can paginate a list when only provided with the page number as a keyword list
+        and the page size defaults to 10" do
+      page = Scrivener.paginate(@languages, page: 2)
+
+      assert page.page_size == 10
+      assert page.page_number == 2
+      assert page.entries == [ "Perl", "Python", "Ruby", "Rust", "SQL"]
+      assert page.total_pages == Float.ceil(length(@languages)/10)
+      assert page.total_entries == @total_entries
+    end
+
+    it "can paginate a list when provided the current page and page size is absent" do
+      page = Scrivener.paginate(@languages, page: 2)
+
+      assert page.page_size == 10
+      assert page.page_number == 2
+      assert page.entries == ["Perl", "Python", "Ruby", "Rust", "SQL"]
+      assert page.total_pages == Float.ceil(length(@languages)/10)
+      assert page.total_entries == @total_entries
+    end
+
+      it "cannot respect a max_page_size configuration" do
+        page = Scrivener.paginate(@languages, page: 2, page_size: 200)
+
+        refute page.page_size < 200
+        assert page.page_number == 2
+        assert page.entries == []
+        assert page.total_pages == Float.ceil(length(@languages)/200)
+        assert page.total_entries == @total_entries
+      end
+
   end
 
 
