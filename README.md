@@ -165,26 +165,26 @@ defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, pa
 Add [scrivener](https://hex.pm/packages/scrivener) and [scrivener_list](https://hex.pm/packages/scrivener_list) to your list of dependencies in `mix.exs`:
 
 ```elixir
-  def deps do
-    [
-      {:scrivener_list, "~> 0.9"}
-    ]
-  end
+def deps do
+  [
+    {:scrivener_list, "~> 0.9"}
+  ]
+end
 ```
 
 Set up the Repo module for using scrivener
 
 ```elixir
-  defmodule MyApp.Repo do
-    use Ecto.Repo, otp_app: :my_app
-    use Scrivener, page_size: 10, max_page_size: 100
-  end
+defmodule MyApp.Repo do
+  use Ecto.Repo, otp_app: :my_app
+  use Scrivener, page_size: 10, max_page_size: 100
+end
 ```
 
 ## Tests
 
 ```shell
-  mix test
+mix test
 ```
 
 
