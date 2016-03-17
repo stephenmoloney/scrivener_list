@@ -1,4 +1,4 @@
-defmodule ScrivenerList.Mixfile do
+defmodule Scrivener.List.Mixfile do
   use Mix.Project
 
   def project do

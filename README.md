@@ -1,9 +1,9 @@
-# ScrivenerList [![Build Status](https://travis-ci.org/stephenmoloney/scrivener_list.svg)](https://travis-ci.org/stephenmoloney/scrivener_list) [![Hex Version](http://img.shields.io/hexpm/v/scrivener_list.svg?style=flat)](https://hex.pm/packages/scrivener_list) [![Hex docs](http://img.shields.io/badge/hex.pm-docs-green.svg?style=flat)](https://hexdocs.pm/scrivener_list)
+# Scrivener.List [![Build Status](https://travis-ci.org/stephenmoloney/scrivener_list.svg)](https://travis-ci.org/stephenmoloney/scrivener_list) [![Hex Version](http://img.shields.io/hexpm/v/scrivener_list.svg?style=flat)](https://hex.pm/packages/scrivener_list) [![Hex docs](http://img.shields.io/badge/hex.pm-docs-green.svg?style=flat)](https://hexdocs.pm/scrivener_list)
 
-[ScrivenerList](https://hex.pm/packages/scrivener_list) is a Scrivener compatible extension that
+[Scrivener.List](https://hex.pm/packages/scrivener_list) is a Scrivener compatible extension that
 allows one to paginate a list of elements.
 
-ScrivenerList extends the functions `Scrivener.paginate/2` and `MyApp.Repo.paginate/2` such that
+Scrivener.List extends the functions `Scrivener.paginate/2` and `MyApp.Repo.paginate/2` such that
 a list can be passed and the function returns pages in the %Scrivener.Page{} format, the same as scrivener.
 [Scrivener](https://hexdocs.pm/scrivener/) is a required dependency but the creation of
 a Repo module and `use Scrivener` statement therein is optional.

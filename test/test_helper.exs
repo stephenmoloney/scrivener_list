@@ -1,4 +1,4 @@
-defmodule ScrivenerList.TestCase do
+defmodule Scrivener.List.TestCase do
   use ExUnit.CaseTemplate
   using(opts) do
     quote do

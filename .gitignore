@@ -2,5 +2,6 @@
 /cover
 /deps
 /.idea
+/doc
 erl_crash.dump
 *.ez

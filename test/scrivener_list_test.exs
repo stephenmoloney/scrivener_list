@@ -1,5 +1,5 @@
-defmodule ScrivenerListTest do
-  use ScrivenerList.TestCase
+defmodule Scrivener.ListTest do
+  use Scrivener.List.TestCase
   @languages ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
                        "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
   @total_entries length(@languages)
