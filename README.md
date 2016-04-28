@@ -54,32 +54,16 @@ defp maybe_put_default_config(%{page: page_number, page_size: page_size} = param
 defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, page_size: 10}
 ```
 
-#### Example using a `%Scrivener.Config{}` struct
+#### Examples using a `%Scrivener.Config{}` struct, a keyword list and a map respectively
 
 ```elixir  
-["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp", "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-|> MyApp.Repo.paginate(%Scrivener.Config{page_number: 1, page_size: 4})
-```
-
-#### Example using a keyword list of options
-
-```elixir
-["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp", "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-|> MyApp.Repo..paginate(page: 1, page_size: 4)
-```
-
-#### Example using a map of options
-
-```elixir
-["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp", "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-|> MyApp.Repo.paginate(%{page: 1, page_size: 4})
-```
-
-#### Example using only the page number (page_size defaults to 10)
-
-```elixir
-["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp", "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-|> MyApp.Repo.paginate(%{page: 1})
+list = ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
+        "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+        
+MyApp.Repo.paginate(list, %Scrivener.Config{page_number: 1, page_size: 4}) # %Scrivener.Config{}
+MyApp.Repo..paginate(list, page: 1, page_size: 4) # keyword list
+MyApp.Repo.paginate(%{page: 1, page_size: 4}) # map
+MyApp.Repo.paginate(%{page: 1}) # map with only page number (page_size defaults to 10)
 ```
 
 
