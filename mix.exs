@@ -4,19 +4,22 @@ defmodule Scrivener.List.Mixfile do
   def project do
     [
      app: :scrivener_list,
-     version: "0.9.0",
+     name: "Scrivener.List",
+     version: "1.0.0",
+     source_url: "https://github.com/stephenmoloney/scrivener_list",
+     homepage_url: "https://hexdocs.pm/scrivener_list",
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     source_url: "https://github.com/stephenmoloney/scrivener_list",
-     homepage_url: "https://hexdocs.pm/scrivener_list",
-     description: description,
-     package: package,
-     deps: deps,
+     description: description(),
+     package: package(),
+     deps: deps(),
      docs: [
        main: "README.md",
-       extra_section: "Readme",
-       extras: ["README.md": [path: "README.md", title: "Readme"]]
+       extra_section: "GUIDE",
+       extras: [
+                "README.md": [path: "README.md", title: "GUIDE"]
+               ]
      ]
     ]
   end
@@ -29,7 +32,7 @@ defmodule Scrivener.List.Mixfile do
 
   defp deps do
     [
-     {:scrivener, github: "drewolson/scrivener", branch: "v2"},
+     {:scrivener_ecto, github: "drewolson/scrivener_ecto"},
      {:ex_spec, "~> 1.0", only: :test},
      {:earmark, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.11", only: :dev}

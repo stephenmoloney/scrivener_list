@@ -1,11 +1,13 @@
 defimpl Scrivener.Paginater, for: List do
   # An implementation of the `Scrivener.Paginater` protocol to extend `Scrivener.Paginater.paginate/2`
-  # to accept a list as the first argument in addition to Ecto.Query.t.
   alias Scrivener.Config
   alias Scrivener.Page
 
 
-
+  @doc ~s"""
+  Implementation of `Scrivener.Paginater` protocol to extend the `Scrivener.Paginater.paginate/2` function.
+  """
+  @spec paginate(any, map | Keyword.t) :: Scrivener.Page.t
   def paginate(entries, %Config{page_number: page_number, page_size: page_size}) do
       total_entries = length(entries)
 
