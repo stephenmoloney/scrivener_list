@@ -31,7 +31,7 @@ library is also being used in the project and gives access to the pre-configured
 
 `max_page_size` **cannot** be configured with method 1.
 
-#### Example
+### Examples
 
 ```elixir
 def index(conn, params) do
@@ -54,7 +54,6 @@ defp maybe_put_default_config(%{page: page_number, page_size: page_size} = param
 defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, page_size: 10}
 ```
 
-#### Examples using a `%Scrivener.Config{}` struct, a keyword list and a map respectively
 
 ```elixir  
 list = ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
@@ -72,7 +71,7 @@ MyApp.Repo.paginate(%{page: 1}) # map with only page number (page_size defaults 
 Usage without a Repo is entirely optional and is added to `Scrivener.List` for convenience. 
 Firstly, see [Scrivener.Ecto](https://github.com/drewolson/scrivener_ecto) and configure the `MyApp.Repo` module.
 
-#### Example Repo configuration
+### Example Repo configuration
 
 ```elixir
 defmodule MyApp.Repo do
@@ -95,7 +94,7 @@ end
 
 `max_page_size` **can** be configured with method 1. See [Scrivener.Ecto](https://github.com/drewolson/scrivener_ecto).
 
-#### Example
+### Example
 
 Example based on [scrivener_ecto](https://github.com/drewolson/scrivener_ecto) readme.
 
