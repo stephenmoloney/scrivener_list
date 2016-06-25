@@ -1,26 +1,24 @@
 defmodule Scrivener.List.Mixfile do
   use Mix.Project
+  @version "1.0.0"
+  @name "Scrivener.List"
+  @source_url "https://github.com/stephenmoloney/scrivener_list"
+  @homepage_url "https://hexdocs.pm/scrivener_list"
 
   def project do
     [
      app: :scrivener_list,
-     name: "Scrivener.List",
-     version: "1.0.0",
-     source_url: "https://github.com/stephenmoloney/scrivener_list",
-     homepage_url: "https://hexdocs.pm/scrivener_list",
+     name: @name,
+     version: @version,
+     source_url: @source_url,
+     homepage_url: @homepage_url,
      elixir: "~> 1.2",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      description: description(),
      package: package(),
      deps: deps(),
-     docs: [
-       main: "README.md",
-       extra_section: "GUIDE",
-       extras: [
-                "README.md": [path: "README.md", title: "GUIDE"]
-               ]
-     ]
+     docs: docs()
     ]
   end
 
@@ -32,17 +30,16 @@ defmodule Scrivener.List.Mixfile do
 
   defp deps do
     [
-     {:scrivener_ecto, github: "drewolson/scrivener_ecto"},
-     {:ex_spec, "~> 1.0", only: :test},
-     {:earmark, "~> 0.1", only: :dev},
-     {:ex_doc, "~> 0.11", only: :dev}
+     {:scrivener_ecto, "~> 1.0"},
+     {:earmark, "~> 0.2", only: :dev},
+     {:ex_doc, "~> 0.1", only: :dev}
     ]
   end
 
 
   defp description do
     ~S"""
-    A [scrivener](https://github.com/drewolson/scrivener) compatible extension that allows pagination of a list.
+    A scrivener/scrivener_ecto compatible extension that allows pagination of a list.
     """
   end
 
@@ -57,6 +54,16 @@ defmodule Scrivener.List.Mixfile do
         "mix.exs",
         "README.md"
       ]
+    ]
+  end
+
+  defp docs do
+    [
+     main: "README.md",
+     extra_section: "GUIDE",
+     extras: [
+              "README.md": [path: "README.md", title: "GUIDE"]
+             ]
     ]
   end
 

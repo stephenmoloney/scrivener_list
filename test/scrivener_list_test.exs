@@ -7,7 +7,7 @@ defmodule Scrivener.ListTest do
 
 
   describe "paginate when using a repo module" do
-    it "can paginate a list using a Repo module  - 1" do
+    test "can paginate a list using a Repo module  - 1" do
       page = Scrivener.Repo.paginate(@languages)
 
       assert page.page_size == 5
@@ -17,7 +17,7 @@ defmodule Scrivener.ListTest do
       assert page.total_pages == Float.ceil(length(@languages)/5)
     end
 
-    it "can paginate a list using a Repo module - 2" do
+    test "can paginate a list using a Repo module - 2" do
       languages = Enum.take(@languages, 3)
       page = Scrivener.Repo.paginate(languages)
 
@@ -28,7 +28,7 @@ defmodule Scrivener.ListTest do
       assert page.total_pages == Float.ceil(length(languages)/5)
     end
 
-    it "can paginate a list when provided the current page and page size as a params map" do
+    test "can paginate a list when provided the current page and page size as a params map" do
       page = Scrivener.Repo.paginate(@languages, %{"page" => "2", "page_size" => "3"})
 
       assert page.page_size == 3
@@ -38,7 +38,7 @@ defmodule Scrivener.ListTest do
       assert page.total_pages == Float.ceil(length(@languages)/3)
     end
 
-    it "can paginate a list when only provided with the page size as a keyword list
+    test "can paginate a list when only provided with the page size as a keyword list
         and the page number defaults to page 1" do
       page = Scrivener.Repo.paginate(@languages, page_size: 3)
 
@@ -49,7 +49,7 @@ defmodule Scrivener.ListTest do
       assert page.total_entries == @total_entries
     end
 
-    it "can paginate a list when only provided with the page number as a keyword list
+    test "can paginate a list when only provided with the page number as a keyword list
         and the page size defaults to the Repo configured page size" do
       page = Scrivener.Repo.paginate(@languages, page: 2)
 
@@ -60,7 +60,7 @@ defmodule Scrivener.ListTest do
       assert page.total_entries == @total_entries
     end
 
-    it "can respect a max_page_size configuration" do
+    test "can respect a max_page_size configuration" do
       page = Scrivener.Repo.paginate(@languages, page: 2, page_size: 200)
 
       assert page.page_size < 200
@@ -74,7 +74,7 @@ defmodule Scrivener.ListTest do
 
 
   describe "paginate without using a repo module" do
-    it "can paginate a list when passed a Scrivener.Config. t directly - 1" do
+    test "can paginate a list when passed a Scrivener.Config. t directly - 1" do
       page = Scrivener.paginate(@languages, @config)
 
       assert page.page_number == 2
@@ -84,7 +84,7 @@ defmodule Scrivener.ListTest do
       assert page.total_pages == Float.ceil(length(@languages)/4)
     end
 
-    it "can paginate a list when passed a Scrivener.Config. t directly - 2" do
+    test "can paginate a list when passed a Scrivener.Config. t directly - 2" do
       languages = Enum.take(@languages, 3)
       page = Scrivener.paginate(languages, @config)
 
@@ -95,7 +95,7 @@ defmodule Scrivener.ListTest do
       assert page.total_pages == Float.ceil(length(languages)/4)
     end
 
-    it "can paginate a list when provided the current page and page size as a params map" do
+    test "can paginate a list when provided the current page and page size as a params map" do
       page = Scrivener.paginate(@languages, %{"page" => "2", "page_size" => "3"})
 
       assert page.page_size == 3
@@ -105,7 +105,7 @@ defmodule Scrivener.ListTest do
       assert page.total_pages == Float.ceil(length(@languages)/3)
     end
 
-    it "can paginate a list when provided the current page and page size as a keyword list" do
+    test "can paginate a list when provided the current page and page size as a keyword list" do
       page = Scrivener.paginate(@languages, page: 2, page_size: 3)
 
       assert page.page_size == 3
@@ -115,7 +115,7 @@ defmodule Scrivener.ListTest do
       assert page.total_entries == @total_entries
     end
 
-    it "can paginate a list when only provided with the page size as a keyword list
+    test "can paginate a list when only provided with the page size as a keyword list
         and the page number defaults to page 1" do
       page = Scrivener.paginate(@languages, page_size: 3)
 
@@ -126,7 +126,7 @@ defmodule Scrivener.ListTest do
       assert page.total_entries == @total_entries
     end
 
-    it "can paginate a list when only provided with the page number as a keyword list
+    test "can paginate a list when only provided with the page number as a keyword list
         and the page size defaults to 10" do
       page = Scrivener.paginate(@languages, page: 2)
 
@@ -137,7 +137,7 @@ defmodule Scrivener.ListTest do
       assert page.total_entries == @total_entries
     end
 
-    it "can paginate a list when provided the current page and page size is absent" do
+    test "can paginate a list when provided the current page and page size is absent" do
       page = Scrivener.paginate(@languages, page: 2)
 
       assert page.page_size == 10
@@ -147,16 +147,15 @@ defmodule Scrivener.ListTest do
       assert page.total_entries == @total_entries
     end
 
-      it "cannot respect a max_page_size configuration" do
-        page = Scrivener.paginate(@languages, page: 2, page_size: 200)
+    test "cannot respect a max_page_size configuration" do
+      page = Scrivener.paginate(@languages, page: 2, page_size: 200)
 
-        refute page.page_size < 200
-        assert page.page_number == 2
-        assert page.entries == []
-        assert page.total_pages == Float.ceil(length(@languages)/200)
-        assert page.total_entries == @total_entries
-      end
-
+      refute page.page_size < 200
+      assert page.page_number == 2
+      assert page.entries == []
+      assert page.total_pages == Float.ceil(length(@languages)/200)
+      assert page.total_entries == @total_entries
+    end
   end
 
 
