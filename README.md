@@ -90,7 +90,6 @@ end
 - ```config```: A configuration object with the pagination details. Can be in any of the following formats:
      - ```%{page: page_number, page_size: page_size}``` (map)
      - ```[page: page_number, page_size: page_size]``` (Keyword.t)
-     - ```%Scrivener.Config{page_number: page_number, page_size: page_size}``` (Scrivener.Config.t)
 
 `max_page_size` **can** be configured with method 1. See [Scrivener.Ecto](https://github.com/drewolson/scrivener_ecto).
 
