@@ -60,7 +60,7 @@ list = ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", 
         "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
         
 MyApp.Repo.paginate(list, %Scrivener.Config{page_number: 1, page_size: 4}) # %Scrivener.Config{}
-MyApp.Repo..paginate(list, page: 1, page_size: 4) # keyword list
+MyApp.Repo.paginate(list, page: 1, page_size: 4) # keyword list
 MyApp.Repo.paginate(%{page: 1, page_size: 4}) # map
 MyApp.Repo.paginate(%{page: 1}) # map with only page number (page_size defaults to 10)
 ```
