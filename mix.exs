@@ -12,7 +12,7 @@ defmodule Scrivener.List.Mixfile do
      version: @version,
      source_url: @source_url,
      homepage_url: @homepage_url,
-     elixir: "~> 1.2",
+     elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      description: description(),
