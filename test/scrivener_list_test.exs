@@ -1,7 +1,7 @@
 defmodule Scrivener.ListTest do
   use Scrivener.List.TestCase
   @languages ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
-                       "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+              "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
   @total_entries length(@languages)
   @config %Scrivener.Config{page_number: 2, page_size: 4}
 

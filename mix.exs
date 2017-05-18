@@ -24,27 +24,27 @@ defmodule Scrivener.List.Mixfile do
 
 
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :scrivener_ecto]]
   end
 
 
-  defp deps do
+  defp deps() do
     [
      {:scrivener_ecto, "~> 1.0"},
-     {:earmark, "~> 0.2", only: :dev},
+     {:earmark, "~> 1.0", only: :dev},
      {:ex_doc, "~> 0.1", only: :dev}
     ]
   end
 
 
-  defp description do
+  defp description() do
     ~S"""
     A scrivener/scrivener_ecto compatible extension that allows pagination of a list.
     """
   end
 
 
-  defp package do
+  defp package() do
     [
       maintainers: ["Stephen Moloney"],
       licenses: ["MIT"],
