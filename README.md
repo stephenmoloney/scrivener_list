@@ -132,7 +132,14 @@ def deps do
 end
 ```
 
+Also make sure to add `:scrivener_list` to your `applications`:
 
+```elixir
+  def application do
+    [mod: {MyApp, []},
+     applications: [:scrivener_list]]
+  end
+```
 ## Tests
 
 ```shell
