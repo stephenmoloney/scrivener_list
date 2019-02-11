@@ -1,6 +1,6 @@
 defmodule Scrivener.List.Mixfile do
   use Mix.Project
-  @version "2.0.0"
+  @version "2.0.1"
   @name "Scrivener.List"
   @source_url "https://github.com/stephenmoloney/scrivener_list"
   @homepage_url "https://hexdocs.pm/scrivener_list"
@@ -59,7 +59,7 @@ defmodule Scrivener.List.Mixfile do
 
   defp docs do
     [
-      main: "README.md",
+      main: "readme",
       extra_section: "Scrivener.List",
       extras: [
         "README.md": [path: "README.md", title: "Scrivener.List"]
