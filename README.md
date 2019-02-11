@@ -131,7 +131,7 @@ Add [scrivener_list](https://hex.pm/packages/scrivener_list) to your list of dep
 ```elixir
 def deps do
   [
-    {:scrivener_list, "~> 1.0"}
+    {:scrivener_list, "~> 2.0"}
   ]
 end
 ```
