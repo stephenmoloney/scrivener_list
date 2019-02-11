@@ -31,8 +31,8 @@ defmodule Scrivener.List.Mixfile do
       {:scrivener_ecto, "~> 1.0 or ~> 2.0"},
 
       # dev/test
-      {:earmark, "~> 1.3", only: :dev},
-      {:ex_doc, "~> 0.19", only: :dev},
+      {:earmark, "~> 1.3", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
       {:postgrex, ">= 0.0.0", only: :test},
       {:ecto_sql, "~> 3.0", only: :test}
     ]
@@ -59,10 +59,9 @@ defmodule Scrivener.List.Mixfile do
 
   defp docs do
     [
-      main: "README.md",
-      extra_section: "GUIDE",
+      extra_section: "Scrivener.List",
       extras: [
-        "README.md": [path: "README.md", title: "GUIDE"]
+        "README.md": [path: "readme.md.html", title: "Scrivener.List"]
       ]
     ]
   end
