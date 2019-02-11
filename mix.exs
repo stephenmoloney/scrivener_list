@@ -62,7 +62,7 @@ defmodule Scrivener.List.Mixfile do
       main: "README.md",
       extra_section: "Scrivener.List",
       extras: [
-        "README.md": [path: "readme.html", title: "Scrivener.List"]
+        "README.md": [path: "README.md", title: "Scrivener.List"]
       ]
     ]
   end
