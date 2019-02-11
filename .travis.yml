@@ -28,7 +28,7 @@ jobs:
           --exclude='./_build' \
           --exec-args='--frail --rc-path ./.remarkrc'
 
-    - stage: markdown-lint
+    - stage: elixir-lint
       language: elixir
       elixir: 1.8
       otp_release: 21.2
@@ -36,15 +36,8 @@ jobs:
         - mix format --check-formatted --dry-run
 
     - &test
-      stage: test-1.3
-      language: elixir
-      elixir: 1.3
-      otp_release: 19.2
-      script:
-        - mix test
-
-    - <<: *test
       stage: test-1.4
+      language: elixir
       elixir: 1.4
       otp_release: 19.2
 

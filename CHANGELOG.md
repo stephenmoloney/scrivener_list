@@ -17,6 +17,8 @@ a Repo module confusingly - [PR](https://github.com/stephenmoloney/scrivener_lis
     `use` statement when creating a `Repo` module as is required
     for Ecto 3+.
 
+-   Elixir 1.4+ is required for scrivener_ecto 2.x
+
 ## v1.0.1
 
 -   Cannot pass %Scrivener.Config.t into `Scrivener.Repo.paginate`. Change docs to reflect this.
