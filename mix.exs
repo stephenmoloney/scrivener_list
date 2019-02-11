@@ -59,9 +59,10 @@ defmodule Scrivener.List.Mixfile do
 
   defp docs do
     [
+      main: "README.md",
       extra_section: "Scrivener.List",
       extras: [
-        "README.md": [path: "readme.md.html", title: "Scrivener.List"]
+        "README.md": [path: "readme.html", title: "Scrivener.List"]
       ]
     ]
   end
