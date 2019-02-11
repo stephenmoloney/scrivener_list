@@ -1,6 +1,5 @@
 use Mix.Config
 
-if Mix.env == :test do
-  config :scrivener_list, Scrivener.Repo,
-    adapter: Ecto.Adapters.Postgres
+if Mix.env() == :test do
+  config :scrivener_list, Scrivener.Repo, adapter: Ecto.Adapters.Postgres
 end
