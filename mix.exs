@@ -1,6 +1,6 @@
 defmodule Scrivener.List.Mixfile do
   use Mix.Project
-  @version "1.0.1"
+  @version "2.0.0"
   @name "Scrivener.List"
   @source_url "https://github.com/stephenmoloney/scrivener_list"
   @homepage_url "https://hexdocs.pm/scrivener_list"
@@ -22,15 +22,19 @@ defmodule Scrivener.List.Mixfile do
     ]
   end
 
-  def application do
-    [applications: [:logger, :scrivener_ecto]]
+  def extra_applications do
+    [applications: [:logger]]
   end
 
   defp deps() do
     [
       {:scrivener_ecto, "~> 1.0 or ~> 2.0"},
+
+      # dev/test
       {:earmark, "~> 1.3", only: :dev},
-      {:ex_doc, "~> 0.19", only: :dev}
+      {:ex_doc, "~> 0.19", only: :dev},
+      {:postgrex, ">= 0.0.0", only: :test},
+      {:ecto_sql, "~> 3.0", only: :test}
     ]
   end
 

@@ -75,8 +75,12 @@ Firstly, see [Scrivener.Ecto](https://github.com/drewolson/scrivener_ecto) and c
 
 ```elixir
 defmodule MyApp.Repo do
-  use Ecto.Repo, otp_app: :my_app
-  use Scrivener, page_size: 10, max_page_size: 100
+  use Ecto.Repo,
+    otp_app: :my_app,
+    adapter: Ecto.Adapters.Postgres
+  use Scrivener,
+    page_size: 10,
+    max_page_size: 100
 end
 ```
 
@@ -135,7 +139,7 @@ end
 ## Tests
 
 ```shell
-mix test
+MIX_ENV=test mix test
 ```
 
 ## Acknowledgements

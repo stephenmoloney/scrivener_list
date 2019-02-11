@@ -11,7 +11,11 @@ a Repo module confusingly - [PR](https://github.com/stephenmoloney/scrivener_lis
 
 -   Formatting introduced with `mix format`
 
--   Linting the README.md file
+-   Linting the `README.md` file
+
+-   Add example in `README.md` of adding `adapter: Ecto.Adapters.Postgres` in the
+    `use` statement when creating a `Repo` module as is required
+    for Ecto 3+.
 
 ## v1.0.1
 
