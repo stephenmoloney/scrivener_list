@@ -23,7 +23,7 @@
     ["remark-lint-no-file-name-consecutive-dashes"],
     ["remark-lint-no-file-name-outer-dashes"],
     ["remark-lint-no-consecutive-blank-lines"],
-    ["remark-lint-maximum-line-length", "100"],
+    ["remark-lint-maximum-line-length", 100],
     ["remark-lint-no-shell-dollars"],
     ["remark-lint-heading-style", "atx"],
     ["remark-lint-heading-increment"],
