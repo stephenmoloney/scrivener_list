@@ -37,10 +37,11 @@ library is also being used in the project and gives access to the pre-configured
 def index(conn, params) do
   config = maybe_put_default_config(params)
 
-  ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
-    "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-  |> Enum.map(&(&1 <> "  " <> "language"))
-  |> Scrivener.paginate(config)
+  page = 
+    ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
+      "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
+    |> Enum.map(&(&1 <> "  " <> "language"))
+    |> Scrivener.paginate(config)
 
   render conn, :index,
     people: page.entries,
@@ -59,10 +60,10 @@ defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, pa
 list = ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
         "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
         
-MyApp.Repo.paginate(list, %Scrivener.Config{page_number: 1, page_size: 4}) # %Scrivener.Config{}
-MyApp.Repo.paginate(list, page: 1, page_size: 4) # keyword list
-MyApp.Repo.paginate(%{page: 1, page_size: 4}) # map
-MyApp.Repo.paginate(%{page: 1}) # map with only page number (page_size defaults to 10)
+Scrivener.paginate(list, %Scrivener.Config{page_number: 1, page_size: 4}) # %Scrivener.Config{}
+Scrivener.paginate(list, page: 1, page_size: 4) # keyword list
+Scrivener.paginate(list, %{page: 1, page_size: 4}) # map
+Scrivener.paginate(list, %{page: 1}) # map with only page number (page_size defaults to 10)
 ```
 
 
