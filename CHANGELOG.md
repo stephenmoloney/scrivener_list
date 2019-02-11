@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.0.1
+
+-   Fix broken links on hex docs
+
 ## v2.0.0
 
 -   Relax the requirements for `scrivener_ecto` to allow 1.x and 2.x
