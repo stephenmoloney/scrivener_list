@@ -28,7 +28,7 @@ defmodule Scrivener.List.Mixfile do
 
   defp deps() do
     [
-      {:scrivener_ecto, "~> 1.0 or ~> 2.0"},
+      {:scrivener_ecto, "~> 1.0 or ~> 2.0 or ~> 3.0"},
 
       # dev/test
       {:earmark, "~> 1.3", only: :dev, runtime: false},
