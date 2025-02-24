@@ -28,13 +28,13 @@ defmodule Scrivener.List.Mixfile do
 
   defp deps() do
     [
-      {:scrivener_ecto, "~> 3.0", optional: true},
+      {:scrivener_ecto, "~> 3.0 or ~> 2.7", optional: true},
 
       # dev/test
-      {:earmark, "~> 1.4.0", only: :dev, runtime: false},
-      {:ex_doc, "~> 0.37.0", only: :dev, runtime: false},
+      {:earmark, "~> 1.3", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.37", only: :dev, runtime: false},
       {:postgrex, ">= 0.0.0", only: :test},
-      {:ecto_sql, "~> 3.12.0", only: :test}
+      {:ecto_sql, "~> 3.12", only: :test}
     ]
   end
 
