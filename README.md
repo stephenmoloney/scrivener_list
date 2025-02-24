@@ -1,23 +1,22 @@
 # Scrivener.List
-[![Build Status](https://travis-ci.org/stephenmoloney/scrivener_list.svg)](https://travis-ci.org/stephenmoloney/scrivener_list)
 [![Hex Version](http://img.shields.io/hexpm/v/scrivener_list.svg?style=flat)](https://hex.pm/packages/scrivener_list)
 [![Hex docs](http://img.shields.io/badge/hex.pm-docs-green.svg?style=flat)](https://hexdocs.pm/scrivener_list)
 
 [Scrivener.List](https://hex.pm/packages/scrivener_list) is a Scrivener compatible extension that
 allows the pagination of a list of elements.
 
-## Features 
+## Features
 
 1.  Scrivener.List extends the protocol `Scrivener.Paginater.paginate/2` from the [scrivener](https://github.com/drewolson/scrivener) library.
 1.  Scrivener.List also extends the function `MyApp.Repo.paginate/2` from the [scrivener_ecto](https://github.com/drewolson/scrivener_ecto) library.
-    
+
 Using the second feature is entirely optional. It's provided as a convenience where the [scrivener_ecto](https://github.com/drewolson/scrivener_ecto)
 library is also being used in the project and gives access to the
 pre-configured `MyApp.Repo` module.
 
 ## Usage
 
-## 1. Usage without a Repo module 
+## 1. Usage without a Repo module
 
 ```elixir
 Scrivener.paginate(list, config)
@@ -41,7 +40,7 @@ Scrivener.paginate(list, config)
 def index(conn, params) do
   config = maybe_put_default_config(params)
 
-  page = 
+  page =
     ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
       "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
     |> Enum.map(&(&1 <> "  " <> "language"))
@@ -62,7 +61,7 @@ defp maybe_put_default_config(_params), do: %Scrivener.Config{page_number: 1, pa
 ```elixir
 list = ["C#", "C++", "Clojure", "Elixir", "Erlang", "Go", "JAVA", "JavaScript", "Lisp",
         "PHP", "Perl", "Python", "Ruby", "Rust", "SQL"]
-        
+
 Scrivener.paginate(list, %Scrivener.Config{page_number: 1, page_size: 4}) # %Scrivener.Config{}
 Scrivener.paginate(list, page: 1, page_size: 4) # keyword list
 Scrivener.paginate(list, %{page: 1, page_size: 4}) # map
@@ -71,7 +70,7 @@ Scrivener.paginate(list, %{page: 1}) # map with only page number (page_size defa
 
 ## 2. Usage with a Repo module
 
-Usage without a Repo is entirely optional and is added to `Scrivener.List` for convenience. 
+Usage without a Repo is entirely optional and is added to `Scrivener.List` for convenience.
 Firstly, see [Scrivener.Ecto](https://github.com/drewolson/scrivener_ecto) and configure the `MyApp.Repo` module.
 
 ### Example Repo configuration
@@ -108,8 +107,8 @@ Example based on [scrivener_ecto](https://github.com/drewolson/scrivener_ecto) r
 
 ```elixir
 def index(conn, params) do
-  %{age: age, name: name} = params["search"] 
-  
+  %{age: age, name: name} = params["search"]
+
   page = MyApp.Person
   |> where([p], p.age > ^age)
   |> order_by([p], desc: p.age)
