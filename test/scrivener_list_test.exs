@@ -171,5 +171,13 @@ defmodule Scrivener.ListTest do
       assert page.total_pages == Float.ceil(length(@languages) / 200)
       assert page.total_entries == @total_entries
     end
+
+    test "can paginate empty list" do
+      page = Scrivener.paginate([], page: 1, page_size: 10)
+
+      assert page.page_number == 1
+      assert page.total_pages == 1
+      assert page.total_entries == 0
+    end
   end
 end
