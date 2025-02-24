@@ -1,5 +1,9 @@
 # Changelog
 
+## v2.1.1
+
+-   Fix `total_pages` calculation when `total_entries` is zero
+
 ## v2.1.0
 
 -   Relax the requirements for `scrivener_ecto` to allow >=2.7 and 3.x
