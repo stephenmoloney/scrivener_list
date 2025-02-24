@@ -24,6 +24,8 @@ defimpl Scrivener.Paginater, for: List do
     Enum.slice(entries, offset, page_size)
   end
 
+  defp total_pages(0, _page_size), do: 1
+
   defp total_pages(total_entries, page_size) do
     ceiling(total_entries / page_size)
   end
