@@ -1,6 +1,6 @@
 defmodule Scrivener.List.Mixfile do
   use Mix.Project
-  @version "2.0.1"
+  @version "2.0.2"
   @name "Scrivener.List"
   @source_url "https://github.com/stephenmoloney/scrivener_list"
   @homepage_url "https://hexdocs.pm/scrivener_list"
@@ -46,7 +46,7 @@ defmodule Scrivener.List.Mixfile do
 
   defp package() do
     [
-      maintainers: ["Stephen Moloney"],
+      maintainers: ["Stephen Moloney", "Fabian Becker"],
       licenses: ["MIT"],
       links: %{"github" => "https://github.com/stephenmoloney/scrivener_list"},
       files: [
