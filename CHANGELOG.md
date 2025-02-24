@@ -1,8 +1,10 @@
 # Changelog
 
-## v2.0.2
+## v2.1.0
 
--   Relax the requirements for `scrivener_ecto` to 3.x versions
+-   Relax the requirements for `scrivener_ecto` to allow >=2.7 and 3.x
+-   Elixir 1.9 is now required
+-   Update dev/test dependencies
 
 ## v2.0.1
 

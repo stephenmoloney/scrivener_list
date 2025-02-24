@@ -1,6 +1,6 @@
 defmodule Scrivener.List.Mixfile do
   use Mix.Project
-  @version "2.0.2"
+  @version "2.1.0"
   @name "Scrivener.List"
   @source_url "https://github.com/stephenmoloney/scrivener_list"
   @homepage_url "https://hexdocs.pm/scrivener_list"
